@@ -25,10 +25,8 @@ public class Person {
 	private String firstname;
 	private String lastname;
 	private String username;
-	@Transient
+//	@Transient
 	private String password;
-	private byte[] salt;
-	private byte[] hash;
 	private String email;
 	private String phonenumber;
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -51,7 +49,8 @@ public class Person {
 		this.username = username;
 		this.email = email;
 		this.phonenumber = phonenumber;
-		passwordToHash(password);
+		this.password = password;
+//		passwordToHash(password);
 		this.role = role;
 	}
 	public int getId() {
@@ -96,18 +95,18 @@ public class Person {
 	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
 	}
-	public byte[] getHash() {
-		return hash;
-	}
-	public void setHash(byte[] hash) {
-		this.hash = hash;
-	}
-	public byte[] getSalt() {
-		return salt;
-	}
-	public void setSalt(byte[] salt) {
-		this.salt = salt;
-	}
+//	public byte[] getHash() {
+//		return hash;
+//	}
+//	public void setHash(byte[] hash) {
+//		this.hash = hash;
+//	}
+//	public byte[] getSalt() {
+//		return salt;
+//	}
+//	public void setSalt(byte[] salt) {
+//		this.salt = salt;
+//	}
 	public Set<Account> getAccounts() {
 		return accounts;
 	}
@@ -120,20 +119,20 @@ public class Person {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	private void passwordToHash(String password){
-		SecureRandom random = new SecureRandom();
-		byte[] salt = new byte[16];
-		random.nextBytes(salt);
-		this.setSalt(salt);
-
-		MessageDigest md;
-		try {
-			md = MessageDigest.getInstance("SHA-512");
-			md.update(salt);
-			byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
-			this.setHash(hashedPassword);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
+//	private void passwordToHash(String password){
+//		SecureRandom random = new SecureRandom();
+//		byte[] salt = new byte[16];
+//		random.nextBytes(salt);
+//		this.setSalt(salt);
+//
+//		MessageDigest md;
+//		try {
+//			md = MessageDigest.getInstance("SHA-512");
+//			md.update(salt);
+//			byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
+//			this.setHash(hashedPassword);
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		}
+//	}
 }

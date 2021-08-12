@@ -45,20 +45,29 @@ public class AccountService {
 		}
 	}
 	
-	public List<Account> getAccounts(HttpSession session) {
+//	public List<Account> getAccounts(HttpSession session) {
+//		try {
+//			if(session.getAttribute("role").toString() == "banker") {
+//				return accountRepository.findAll();
+//			}else {
+//				Person person = personRespository.findByUsername(session.getAttribute("username").toString());
+//				Set<Account> acc = person.getAccounts();
+//				List<Account> accounts = new ArrayList<Account>();
+//				for(Account a : acc) {
+//					accounts.add(a);
+//				}
+//				return accounts;
+//			}
+//		}catch(Exception e) {
+//			return null;
+//		}
+//	}
+	
+	public Set<Account> getAccounts(String username){
 		try {
-			if(session.getAttribute("role").toString() == "banker") {
-				return accountRepository.findAll();
-			}else {
-				Person person = personRespository.findByUsername(session.getAttribute("username").toString());
-				Set<Account> acc = person.getAccounts();
-				List<Account> accounts = new ArrayList<Account>();
-				for(Account a : acc) {
-					accounts.add(a);
-				}
-				return accounts;
-			}
-		}catch(Exception e) {
+			Person person = personRespository.findByUsername(username);
+			return person.getAccounts();
+		} catch(Exception e) {
 			return null;
 		}
 	}

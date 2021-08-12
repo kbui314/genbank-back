@@ -26,17 +26,17 @@ public class PersonController {
 		return personService.registerUser(person);
 	}
 	
-	@PostMapping("/login")
-	public Person login(@RequestBody Person person, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		return personService.loginUser(person, (request.getSession(false)==null) ? request.getSession(true):request.getSession(false));
-	}
+//	@PostMapping("/login")
+//	public Person login(@RequestBody Person person, HttpServletRequest request) {
+//		HttpSession session = request.getSession(false);
+//		return personService.loginUser(person, (request.getSession(false)==null) ? request.getSession(true):request.getSession(false));
+//	}
 	
-	public void setSession(String username, int id, String role, HttpSession session) {
-		session.setAttribute("username", username);
-		session.setAttribute("id", Integer.toString(id));
-		session.setAttribute("role",role);
-	}
+//	public void setSession(String username, int id, String role, HttpSession session) {
+//		session.setAttribute("username", username);
+//		session.setAttribute("id", Integer.toString(id));
+//		session.setAttribute("role",role);
+//	}
 	
 	@GetMapping("/logout")
 	public Person logout(HttpServletRequest request) {
