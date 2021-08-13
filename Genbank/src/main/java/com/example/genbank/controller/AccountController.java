@@ -2,8 +2,6 @@ package com.example.genbank.controller;
 
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,14 +22,10 @@ public class AccountController {
 	AccountService accountService;
 	
 	@GetMapping("addaccount")
-	public Account addAccount(HttpServletRequest request) {
-		return accountService.addNewAccount(request.getSession(false));
+	public Account addAccount(Authentication auth) {
+		return accountService.addNewAccount(auth.getName());
 	}
 	
-//	@GetMapping("viewaccounts")
-//	public List<Account> getAccounts(HttpServletRequest request, Authentication auth) {
-//		return accountService.getAccounts(request.getSession(false));
-//	}
 	@GetMapping("/viewaccounts")
 	public Set<Account> getAccounts(Authentication auth){
 		return accountService.getAccounts(auth.getName());

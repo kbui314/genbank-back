@@ -1,12 +1,7 @@
 package com.example.genbank.service;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,8 +22,6 @@ public class PersonService implements UserDetailsService {
 	private AccountService accountService;
 
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	private HttpSession httpSession;
 	
 	@Autowired
 	public PersonService(PersonRepository personRepository, AccountService accountService, BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -90,34 +83,4 @@ public class PersonService implements UserDetailsService {
 			return p;
 		}
 	}
-	
-//	public Person loginUser(Person person, HttpSession session) {
-//		Person p = new Person(0,"","","","","","","");
-//		try {
-//			Person loginPerson = personRepository.findByUsername(person.getUsername());
-//			MessageDigest md;
-//			md = MessageDigest.getInstance("SHA-512");
-//			md.update(loginPerson.getSalt());
-//			byte[] hashedPassword = md.digest(person.getPassword().toString().getBytes(StandardCharsets.UTF_8));
-//			if (Arrays.equals(hashedPassword, loginPerson.getHash())) {
-//				setSession(loginPerson.getUsername(), loginPerson.getId(), loginPerson.getRole(),session);
-//				return loginPerson;
-//			}
-//			return p;
-//		}catch(Exception e) {
-//			return p;
-//		}
-//	}
-	
-	public void setSession(String username, int id, String role, HttpSession session) {
-		session.setAttribute("username", username);
-		session.setAttribute("id", Integer.toString(id));
-		session.setAttribute("role",role);
-	}
-
-//	public void setHttpSession(String username, int id, String role) {
-//		httpSession.setAttribute("username", username);
-//		httpSession.setAttribute("id", Integer.toString(id));
-//		httpSession.setAttribute("role",role);
-//	}
 }

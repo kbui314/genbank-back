@@ -1,12 +1,8 @@
 package com.example.genbank.controller;
 
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,22 +22,10 @@ public class PersonController {
 		return personService.registerUser(person);
 	}
 	
-//	@PostMapping("/login")
-//	public Person login(@RequestBody Person person, HttpServletRequest request) {
-//		HttpSession session = request.getSession(false);
-//		return personService.loginUser(person, (request.getSession(false)==null) ? request.getSession(true):request.getSession(false));
+//	@GetMapping("/logout")
+//	public Person logout(HttpServletRequest request) {
+//		request.getSession().invalidate();
+//		return null;
 //	}
-	
-//	public void setSession(String username, int id, String role, HttpSession session) {
-//		session.setAttribute("username", username);
-//		session.setAttribute("id", Integer.toString(id));
-//		session.setAttribute("role",role);
-//	}
-	
-	@GetMapping("/logout")
-	public Person logout(HttpServletRequest request) {
-		request.getSession().invalidate();
-		return null;
-	}
 
 }

@@ -1,13 +1,9 @@
 package com.example.genbank.service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,33 +31,13 @@ public class AccountService {
 		Random random = new Random();
 		int accountNumber = random.nextInt(9000000) + 1000000; 
 		Account newAccount = new Account(0,Integer.toString(accountNumber),0);
-		Account newUserAcc;
 		try {
-			newUserAcc = accountRepository.save(newAccount);
-			return newUserAcc;
+			accountRepository.save(newAccount);
+			return newAccount;
 		}catch(Exception e) {
-			newUserAcc = new Account();
-			return newUserAcc;
+			return new Account();
 		}
 	}
-	
-//	public List<Account> getAccounts(HttpSession session) {
-//		try {
-//			if(session.getAttribute("role").toString() == "banker") {
-//				return accountRepository.findAll();
-//			}else {
-//				Person person = personRespository.findByUsername(session.getAttribute("username").toString());
-//				Set<Account> acc = person.getAccounts();
-//				List<Account> accounts = new ArrayList<Account>();
-//				for(Account a : acc) {
-//					accounts.add(a);
-//				}
-//				return accounts;
-//			}
-//		}catch(Exception e) {
-//			return null;
-//		}
-//	}
 	
 	public Set<Account> getAccounts(String username){
 		try {
@@ -72,15 +48,15 @@ public class AccountService {
 		}
 	}
 	
-	public Account addNewAccount(HttpSession session) {
-		Account a = new Account(0,"",0);
+	public Account addNewAccount(String username) {
+		Account a = new Account(0, "", 0);
 		try {
-			Person user = personRespository.findByUsername(session.getAttribute("username").toString());
+			Person person = personRespository.findByUsername(username);
 			Account newAccount = createAccount();
-			user.getAccounts().add(newAccount);
-			personRespository.save(user);
+			person.getAccounts().add(newAccount);
+			personRespository.save(person);
 			return newAccount;
-		}catch(Exception e) {
+		} catch(Exception e) {
 			return a;
 		}
 	}
