@@ -1,13 +1,11 @@
 package com.example.genbank.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,13 +22,13 @@ public class AccountController {
 	AccountService accountService;
 	
 	@GetMapping("addaccount")
-	public Account addAccount(HttpServletRequest request) {
-		return accountService.addNewAccount(request.getSession(false));
+	public Account addAccount(Authentication auth) {
+		return accountService.addNewAccount(auth.getName());
 	}
 	
-	@GetMapping("viewaccounts")
-	public List<Account> getAccounts(HttpServletRequest request) {
-		return accountService.getAccounts(request.getSession(false));
+	@GetMapping("/viewaccounts")
+	public Set<Account> getAccounts(Authentication auth){
+		return accountService.getAccounts(auth.getName());
 	}
 	
 	@PostMapping("deposit")

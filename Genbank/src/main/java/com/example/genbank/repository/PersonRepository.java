@@ -8,7 +8,7 @@ import com.example.genbank.entity.Person;
 @Repository
 public interface PersonRepository extends JpaRepository<Person,Integer>{
 
-	public Person findById(int id);
+	Person findById(int id);
 	
-	public Person findByUsername(String username);
+	Person findByUsername(String username);
 }

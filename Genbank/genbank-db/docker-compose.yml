@@ -1,0 +1,13 @@
+version: '3.1'
+services:
+  genbankdb:
+    image: postgres
+    container_name: genbankdb
+    environment:
+      POSTGRES_USER: genbank
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: genbankdb
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql

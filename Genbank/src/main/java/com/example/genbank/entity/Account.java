@@ -28,7 +28,7 @@ public class Account {
 	@JoinTable(name = "transholder",
 			joinColumns = @JoinColumn(name = "accnumberid"),
 			inverseJoinColumns = @JoinColumn(name = "transactionid"))
-	private Set<Transaction> transaction;
+	private Set<Transaction> transactions;
 	
 	public Account() {
 		super();
@@ -66,11 +66,11 @@ public class Account {
 	}
 
 	public Set<Transaction> getTransaction() {
-		return transaction;
+		return transactions;
 	}
 
-	public void setTransaction(Set<Transaction> transaction) {
-		this.transaction = transaction;
+	public void setTransaction(Set<Transaction> transactions) {
+		this.transactions = transactions;
 	}
 	
 	

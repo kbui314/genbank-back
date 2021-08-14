@@ -13,3 +13,7 @@ Here is the Angular front-end for the GenBank Application https://github.com/kbu
 * A user can deposit into their account.
 * A user can withdraw from their account.
 * A user can transfer money into another account.
+
+### In-Progress Features
+* Incorporate Spring Session or JWT Token validation so that the chrome security features does not need to be disabled 
+in order for this application to run.
