@@ -18,6 +18,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.example.genbank.constants.SecurityConstants;
 import com.example.genbank.entity.Person;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	
@@ -31,7 +32,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) {
 		try {
-			Person creds = new ObjectMapper().readValue(req.getInputStream(), Person.class);
+			ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+//			Person creds = new ObjectMapper().readValue(req.getInputStream(), Person.class);
+			Person creds = objectMapper.readValue(req.getInputStream(), Person.class);
 			return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(creds.getUsername(), creds.getPassword()));
 		} catch(Exception e) {
 			throw new RuntimeException(e);
