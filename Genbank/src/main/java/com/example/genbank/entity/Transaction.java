@@ -28,6 +28,18 @@ public class Transaction {
 	private double balance;
 	
 	private String message;
+	
+	private String helloMessage;
+
+	
+
+	public void setHelloMessage(String helloMessage) {
+		this.helloMessage = helloMessage;
+	}
+
+	public String getHelloMessage() {
+		return helloMessage;
+	}
 
 	public Transaction() {
 		super();
