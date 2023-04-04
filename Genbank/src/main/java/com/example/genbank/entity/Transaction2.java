@@ -29,7 +29,17 @@ public class Transaction2 {
 	
 	private String message;
 
-	public Transaction2() {
+    private String hello;
+
+	public String getHello() {
+        return hello;
+    }
+
+    public void setHello(String hello) {
+        this.hello = hello;
+    }
+
+    public Transaction2() {
 		super();
 	}
 
